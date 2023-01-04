@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native'
 
 import React from 'react'
+import { routes } from '../../router/routes'
 import { styles } from './home.style'
 
 const HomePage = ({ navigation }) => {
@@ -23,7 +24,7 @@ const HomePage = ({ navigation }) => {
           Already a member? { }
           <Text 
             style={styles.colorized}
-            onPress={() => navigation.navigate(routes.login)}
+            onPress={() => navigation.navigate(routes.explore)}
           >
             Log in
           </Text>

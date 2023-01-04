@@ -5,11 +5,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonIcon: {
-    width: 36,
-    height: 36,
-    backgroundColor: "red"
-  },
   buttonText: {
     marginTop: 4,
     fontSize: 12,
