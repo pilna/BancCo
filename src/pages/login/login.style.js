@@ -4,9 +4,9 @@ export const styles = StyleSheet.create({
   loginPageContainer: {
     paddingHorizontal: "5%",
     paddingVertical: "5%",
-    height: "100vh",
+    height: "100%",
     alignItems: "center",
-    display: "column",
+    flexDirection: "column",
     justifyContent: "space-between",
   },
   loginTitle: {

@@ -13,6 +13,7 @@ const Button = ({
   fontSize,
   fontWeight,
   backgroundColor,
+  width = 50,
   labelOrientation = "lower",
   fullWidth = false
 }) => {
@@ -43,7 +44,7 @@ const Button = ({
         backgroundColor: backgroundColor || "#DEE1DF",
         justifyContent: labelIsOnRow ? "space-between" : "center",
         flexDirection: labelIsOnRow ? "row" : "column",
-        width: fullWidth ? "100%" : "fit-content"
+        width: fullWidth ? "100%" : width,
       }}
     >
       {labelBeforeImage && (
@@ -56,17 +57,7 @@ const Button = ({
           {label}
         </Text>
       )}
-      {icon && (
-        <Image 
-          style={{
-            ...styles.buttonIcon,
-            tintColor: iconColor || "#000",
-            width: iconSize || 36,
-            height: iconSize || 36
-          }}
-          source={icon} 
-        /> 
-      )}
+      {icon}
       {labelAfterImage && (
         <Text 
           style={{

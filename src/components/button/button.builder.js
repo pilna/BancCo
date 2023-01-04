@@ -40,6 +40,11 @@ export class ButtonBuilder {
     return this
   }
 
+  setWidth(width) {
+    this.props.width = width
+    return this
+  }
+
   setFontWeight(weight) {
     this.props.fontWeight = weight
     return this

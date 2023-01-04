@@ -2,8 +2,7 @@ import ArrowUpCircle from "../../../assets/arrow-up-circle.svg";
 import Earth from "../../../assets/earth.svg";
 import Map from "../../../assets/map.svg";
 import Profile from "../../../assets/profile.svg";
-import { SvgXml } from 'react-native-svg';
-import { routes } from "../../router";
+import { routes } from "../../router/routes";
 
 export const navigationConfig = {
   items: [

@@ -1,48 +1,49 @@
 import { ButtonBuilder } from "./button.builder"
-import compass from "../../../assets/compass.svg"
-import globeIcon from "../../../assets/globe.svg"
-import pauseIcon from "../../../assets/pause.svg"
-import photoIcon from "../../../assets/photo.svg"
-import pinIcon from "../../../assets/pin.svg"
+import Compass from "../../../assets/compass.svg"
+import GlobeIcon from "../../../assets/globe.svg"
+import PauseIcon from "../../../assets/pause.svg"
+import PhotoIcon from "../../../assets/photo.svg"
+import PinIcon from "../../../assets/pin.svg"
 
 export class ButtonFactory {
   constructor() {}
 
   createGlobButton(onClick) {
     return new ButtonBuilder()
-      .withIcon(globeIcon)
+      .withIcon(<GlobeIcon width={36} height={36} />)
       .withOnClick(onClick)
       .build()
   }
 
   createCompassButton(onClick) {
     return new ButtonBuilder()
-      .withIcon(compass)
+      .withIcon(<Compass width={36} height={36} />)
       .withOnClick(onClick)
       .build()
   }
 
   createPhotoButton(onClick) {
     return new ButtonBuilder()
-      .withIcon(photoIcon)
+      .withIcon(<PhotoIcon width={36} height={36} />)
       .withOnClick(onClick)
       .build()
   }
 
   createLiveTrackingButton(onClick) {
     return new ButtonBuilder()
-      .withIcon(pinIcon)
+      .withIcon(<PinIcon width={36} height={36} />)
       .withLabel("Live Tracking")
       .setLabelOrientation("right")
       .setFontWeight("bold")
       .setFontSize(16)
+      .setWidth(160)
       .withOnClick(onClick)
       .build()
   }
 
   createPauseTrackingButton(onClick) {
     return new ButtonBuilder()
-      .withIcon(pauseIcon)
+      .withIcon(<PauseIcon width={36} height={36} />)
       .withOnClick(onClick)
       .setIconColor("#FFA300")
       .build()

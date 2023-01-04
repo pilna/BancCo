@@ -24,7 +24,7 @@ const HomePage = ({ navigation }) => {
           Already a member? { }
           <Text 
             style={styles.colorized}
-            onPress={() => navigation.navigate(routes.explore)}
+            onPress={() => navigation.navigate(routes.login)}
           >
             Log in
           </Text>

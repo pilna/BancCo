@@ -2,6 +2,7 @@ import { Text, TextInput, View } from 'react-native'
 
 import { ButtonFactory } from '../../components/button/button.factory';
 import React from 'react'
+import { routes } from "../../router/routes"
 import { styles } from './register.style';
 import { useRegister } from './register.logic';
 
@@ -64,6 +65,7 @@ const RegisterPage = ({ navigation }) => {
         'Register',
         () => {
           onRegister();
+          navigation.navigate(routes.login);
         }
       )}
     </View>

@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   statsModalContainer: {
-    width: "100vw",
+    width: "100%",
     backgroundColor: "#DFE2DE",
     justifyContent: "center",
     alignItems: "center",
@@ -10,19 +10,15 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 15,
   },
   statsModalContentContainer: {
-    width: "100vw",
+    width: "100%",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
-  statsModalArrowIcon: {
-    width: 24,
-    height: 24,
-  },
   navigationContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    width: "100vw",
+    width: "100%",
     backgroundColor: "#DDDFE2"
   }
 });

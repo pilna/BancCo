@@ -2,7 +2,7 @@ import { Text, TextInput, View } from 'react-native'
 
 import { ButtonFactory } from '../../components/button/button.factory';
 import React from 'react'
-import { routes } from '../../router';
+import { routes } from '../../router/routes';
 import { styles } from './login.style';
 import { useLogin } from './login.logic';
 
@@ -65,6 +65,7 @@ const LoginPage = ({ navigation }) => {
         "Sign In",
         () => {
           onLogin();
+          navigation.navigate(routes.explore);
         }
       )}
     </View>
