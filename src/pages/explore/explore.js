@@ -1,37 +1,13 @@
-import React, { useEffect, useState } from 'react'
-
 import MapView from 'react-native-maps'
-// import DataService from '../../services/data-service'
 import { MobileLayout } from '../../layout'
-import { Text } from 'react-native'
+import React from 'react'
+import { useSuggestions } from '../../hooks/useSuggestions';
 
 const ExplorePage = ({ navigation }) => {
+  const { loading, error, suggestions } = useSuggestions();
 
-  /** 
-  const [suggestions, setSuggestions] = useState([])
-  const [voiries, setVoiries] = useState([])
-  const [pav, setPav] = useState([])
-
-  useEffect(() => {
-    DataService.getFeatureAsList(DataService.features.suggestions)
-      .then((data) => {
-        setSuggestions(data)
-      });
-    DataService.getFeatureAsList(DataService.features.voiries)
-      .then((data) => {
-        setVoiries(data)
-      });
-    DataService.getFeatureAsList(DataService.features.pav)
-      .then((data) => {
-        setPav(data)
-      });
-  }, [])
+  // console.log("suggestions", suggestions);
   
-  console.log("suggestions", suggestions)
-  console.log("voiries", voiries)
-  console.log("pav", pav)
-  */
-
   return (
     <MobileLayout navigation={navigation}>
       <MapView 
