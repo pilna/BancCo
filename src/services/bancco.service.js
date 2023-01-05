@@ -21,10 +21,12 @@ export class BanccoService {
             params: {...this.params, ...{typenames: typenames}} // Le typename est une des 3 features définies dans DataService.features
         })
       .then((response) => {
-        const data = JSON.parse(xml2json(response.data, { compact: true, spaces: 2 }));
+        const data = response.data;
+        console.log(data);
         return data["wfs:FeatureCollection"]["wfs:member"];
       })
       .catch((error) => {
+        console.log("error fetch")
         console.error(error);
       });
   };
@@ -36,10 +38,11 @@ export class BanccoService {
             params: {...this.params, ...{typeName: typeName, featureId: featureId}} // Le typetypename est une des 3 features définies dans DataService.features
         })
       .then((response) => {
-        const data = JSON.parse(xml2json(response.data, { compact: true, spaces: 2 }));
+        const data = response.data;
         return data["wfs:FeatureCollection"]["wfs:member"];
       })
       .catch((error) => {
+        console.log("error fetch")
         console.error(error);
       });
   }

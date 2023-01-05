@@ -1,10 +1,23 @@
+import React, { useEffect } from 'react'
 import { Text, View } from 'react-native'
 
-import React from 'react'
+import axios from 'axios'
 import { routes } from '../../router/routes'
 import { styles } from './home.style'
 
 const HomePage = ({ navigation }) => {
+
+  useEffect(() => {
+    console.log("passing here")
+    axios.get("https://api.publicapis.org/entries")
+      .then((response) => {
+        console.log("response", response)
+      })
+      .catch((error) => {
+        console.log("error", error)
+      })
+  }, [])
+
   return (
     <View style={styles.homePageContainer}>
       <Text style={{
