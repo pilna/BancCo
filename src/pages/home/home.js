@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Text, View } from 'react-native'
 
+import { BanccoService } from '../../services/bancco.service'
 import axios from 'axios'
 import { routes } from '../../router/routes'
 import { styles } from './home.style'
@@ -8,14 +9,9 @@ import { styles } from './home.style'
 const HomePage = ({ navigation }) => {
 
   useEffect(() => {
-    console.log("passing here")
-    axios.get("https://api.publicapis.org/entries")
-      .then((response) => {
-        console.log("response", response)
-      })
-      .catch((error) => {
-        console.log("error", error)
-      })
+    BanccoService.getSuggestions()
+    BanccoService.getVoiries()
+    BanccoService.getPav()
   }, [])
 
   return (

@@ -1,60 +1,66 @@
-import axios from "../config/axios.config";
-// import { xml2json } from "xml-js";
+import axios from "axios";
 
-export class BanccoService {
-  static params = {
-    service: "WFS",
-    version: "2.0.0",
-    request: "GetFeature",
+const defaultOptions = {
+  service: "WFS",
+  version: "2.0.0",
+  request: "GetFeature",
+}
+
+const requestType = {
+  SUGGESTIONS: "orleans:suggestions",
+  VOIRIES: "orleans:espaces_verts_voirie",
+  PAV: "orleans:dechets_pav",
+}
+
+const baseUrl = `https://www.jean-daniel.eu:8443/geoserver/wfs`;
+
+const _buildUrlWithOptions = (options = {}) => {
+  const optionsToUse = {
+    ...defaultOptions,
+    ...options,
   }
 
-  static features = {
-    suggestions: "orleans:suggestions",
-    voiries: "orleans:espaces_verts_voirie",
-    pav: "orleans:dechets_pav",
-  }
+  return baseUrl + "?" + Object.keys(optionsToUse).map((key) => (
+    `${key}=${optionsToUse[key]}`
+  )).join("&")
+}
 
-  static getFeatureAsList = async (typenames) => {
-    return axios
-      .get("",
-        {
-            params: {...this.params, ...{typenames: typenames}} // Le typename est une des 3 features définies dans DataService.features
-        })
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        return data["wfs:FeatureCollection"]["wfs:member"];
-      })
-      .catch((error) => {
-        console.log("error fetch")
-        console.error(error);
-      });
-  };
+const _buildRequestUrl = (requestType, options) => {
+  return _buildUrlWithOptions(options) + `&typeName=${requestType}`;
+}
 
-  static getAFeatureById = async (typeName, featureId) => {
-    return axios
-      .get("",
-        {
-            params: {...this.params, ...{typeName: typeName, featureId: featureId}} // Le typetypename est une des 3 features définies dans DataService.features
-        })
-      .then((response) => {
-        const data = response.data;
-        return data["wfs:FeatureCollection"]["wfs:member"];
-      })
-      .catch((error) => {
-        console.log("error fetch")
-        console.error(error);
-      });
-  }
+const getSuggestions = async () => {
+  return axios.get(_buildRequestUrl(requestType.SUGGESTIONS))
+    .then((response) => (
+      console.log("suggestions", response.data)
+    ))
+    .catch((error) => {
+      console.log("error", error)
+    })
+}
 
-  static postASuggestion = async (suggestion, description, coordinateX, coordinateY) => {
-    return axios
-      .post("")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    }
+const getVoiries = async () => {
+  return axios.get(_buildRequestUrl(requestType.VOIRIES))
+    .then((response) => (
+      console.log("voiries", response.data)
+    ))
+    .catch((error) => {
+      console.log("error", error)
+    })
+}
+
+const getPav = async () => {
+  return axios.get(_buildRequestUrl(requestType.PAV))
+    .then((response) => (
+      console.log("pav", response.data)
+    ))
+    .catch((error) => {
+      console.log("error", error)
+    })
+}
+
+export const BanccoService = {
+  getSuggestions,
+  getVoiries,
+  getPav,
 }
