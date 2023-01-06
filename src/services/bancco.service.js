@@ -31,16 +31,32 @@ const _buildRequestUrl = (requestType, options) => {
 }
 
 const _parseResponse = (response) => {
-  const parser = new XMLParser();
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+  });
   const parsed = parser.parse(response.data);
   return parsed["wfs:FeatureCollection"]["wfs:member"];
 }
 
 const getSuggestions = async () => {
   return axios.get(_buildRequestUrl(requestType.SUGGESTIONS))
-    .then((response) => (
-      _parseResponse(response)
-    ))
+    .then((response) => {
+      const dirtySuggestions = _parseResponse(response)
+      const suggestions = dirtySuggestions.map((suggestion) => {
+        const point = suggestion["orleans:suggestions"]["orleans:wkb_geometry"];
+        return {
+          id: suggestion["orleans:suggestions"]["@_gml:id"],
+          type: suggestion["orleans:suggestions"]["orleans:type"],
+          description: suggestion["orleans:suggestions"]["gml:description"],
+          coordinate: {
+            lattitude: point && point["gml:Point"]["gml:pos"].split(" ")[0],
+            longitude: point && point["gml:Point"]["gml:pos"].split(" ")[1],
+          }
+        }
+      })
+
+      return suggestions;
+    })
     .catch((error) => {
       console.log("error", error)
     })
