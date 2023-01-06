@@ -49,12 +49,12 @@ const getSuggestions = async () => {
           type: suggestion["orleans:suggestions"]["orleans:type"],
           description: suggestion["orleans:suggestions"]["gml:description"],
           coordinate: {
-            lattitude: point && point["gml:Point"]["gml:pos"].split(" ")[0],
-            longitude: point && point["gml:Point"]["gml:pos"].split(" ")[1],
+            lattitude: point && parseFloat(point["gml:Point"]["gml:pos"].split(" ")[0]),
+            longitude: point && parseFloat(point["gml:Point"]["gml:pos"].split(" ")[1]),
           }
         }
       })
-
+      
       return suggestions;
     })
     .catch((error) => {
@@ -74,9 +74,30 @@ const getVoiries = async () => {
 
 const getPav = async () => {
   return axios.get(_buildRequestUrl(requestType.PAV))
-    .then((response) => (
-      _parseResponse(response)
-    ))
+    .then((response) => {
+      const dirtyPavs = _parseResponse(response)
+      const pavs = dirtyPavs.map((pav) => {
+        return {
+          id: pav["orleans:dechets_pav"]["@_gml:id"],
+          openHours: pav["orleans:dechets_pav"]["orleans:opening_hours"],
+          objectId: pav["orleans:dechets_pav"]["orleans:objectid"],
+          defective: pav["orleans:dechets_pav"]["orleans:defective"],
+          defectiveDescription: pav["orleans:dechets_pav"]["orleans:defective_description"],
+          streetName: pav["orleans:dechets_pav"]["orleans:street_name"],
+          postalCode: pav["orleans:dechets_pav"]["orleans:postal_code"],
+          city: pav["orleans:dechets_pav"]["orleans:city_name"],
+          model: pav["orleans:dechets_pav"]["orleans:modele_colonne"],
+          cleaningDays: pav["orleans:dechets_pav"]["orleans:jour_nettoyage"],
+          garbageType: pav["orleans:dechets_pav"]["orleans:garbage_types"],
+          coordinate: {
+            lattitude: parseFloat(pav["orleans:dechets_pav"]["orleans:wkb_geometry"]["gml:Point"]["gml:pos"].split(" ")[0]),
+            longitude: parseFloat(pav["orleans:dechets_pav"]["orleans:wkb_geometry"]["gml:Point"]["gml:pos"].split(" ")[1]),
+          }
+        }
+      })
+      
+      return pavs;
+    })
     .catch((error) => (
       error
     ))
