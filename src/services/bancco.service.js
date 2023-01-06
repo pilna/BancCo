@@ -64,9 +64,22 @@ const getSuggestions = async () => {
 
 const getVoiries = async () => {
   return axios.get(_buildRequestUrl(requestType.VOIRIES))
-    .then((response) => (
-      _parseResponse(response)
-    ))
+    .then((response) => {
+      const dirtyVoiries = _parseResponse(response)
+      const voiries = dirtyVoiries.map((voirie) => {
+        return {
+          id: voirie["orleans:espaces_verts_voirie"]["@_gml:id"],
+          objectid: voirie["orleans:espaces_verts_voirie"]["orleans:objectid"],
+          description: voirie["orleans:espaces_verts_voirie"]["orleans:descriptio"],
+          coordinate: {
+            lattitude: parseFloat(voirie["orleans:espaces_verts_voirie"]["orleans:wkb_geometry"]["gml:Point"]["gml:pos"].split(" ")[0]),
+            longitude: parseFloat(voirie["orleans:espaces_verts_voirie"]["orleans:wkb_geometry"]["gml:Point"]["gml:pos"].split(" ")[1]),
+          }
+        }
+      })
+
+      return voiries;
+    })
     .catch((error) => {
       console.log("error", error)
     })

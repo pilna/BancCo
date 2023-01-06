@@ -4,12 +4,12 @@ import React from 'react'
 import { routes } from '../../router/routes'
 import { styles } from './home.style'
 import { usePav } from '../../hooks/usePav';
+import { useVoiries } from '../../hooks/useVoiries';
 
 const HomePage = ({ navigation }) => {
-  const { loading, error, pav } = usePav();
-  console.log(pav);
+  const { loading, error, voiries } = useVoiries();
 
-  console.log("pav", JSON.stringify(pav, undefined, 2))
+  console.log("pav", JSON.stringify(voiries, undefined, 2))
 
   return (
     <View style={styles.homePageContainer}>
