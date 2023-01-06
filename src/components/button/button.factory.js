@@ -49,15 +49,27 @@ export class ButtonFactory {
       .build()
   }
 
-  createSubmitButton(text, onClick) {
+  createSubmitButton(text, onClick, backgroundColor) {
     return new ButtonBuilder()
       .withLabel(text)
       .withOnClick(onClick)
       .setFullWidth()
-      .setBackgroundColor("#4C8C2C")
+      .setBackgroundColor(backgroundColor || "#4C8C2C")
       .setLabelColor("#fff")
       .setFontWeight("bold")
       .setFontSize(16)
+      .build()
+  }
+
+  createTextButton(text, onClick, backgroundColor) {
+    return new ButtonBuilder()
+      .withLabel(text)
+      .withOnClick(onClick)
+      .setFullWidth()
+      .setBackgroundColor(backgroundColor || "#fff")
+      .setLabelColor("#fff")
+      .setFontSize(14)
+      .setBorderRadius(3)
       .build()
   }
 }

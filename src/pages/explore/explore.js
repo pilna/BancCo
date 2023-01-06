@@ -1,13 +1,14 @@
 import MapView, { Marker } from 'react-native-maps'
 
 import { MobileLayout } from '../../layout'
+import { PavModal } from '../../components';
 import React from 'react'
-import { useSuggestions } from '../../hooks/useSuggestions';
+import { usePav } from '../../hooks/usePav';
+import { useSelectedPav } from '../../hooks/useSelectedPav';
 
 const ExplorePage = ({ navigation }) => {
-  const { loading, error, suggestions } = useSuggestions();
-
-  console.log("suggestions", suggestions);
+  const { loading, error, pav } = usePav();
+  const { selectedPav, selectPav } = useSelectedPav();
 
   return (
     <MobileLayout navigation={navigation}>
@@ -23,17 +24,27 @@ const ExplorePage = ({ navigation }) => {
           height: '100%'
         }}
       >
-        {suggestions && suggestions.map((suggestion, index) => (
+        {pav && pav.map((item, index) => (
           <Marker
             key={index}
             coordinate={{
-              latitude: suggestion.coordinate.lattitude,
-              longitude: suggestion.coordinate.longitude,
+              latitude: item.coordinate.lattitude,
+              longitude: item.coordinate.longitude,
             }}
             pinColor="purple"
+            onPress={() => {
+              selectPav(item);
+            }}
           />
         ))}
       </MapView>
+
+      {selectedPav && (
+        <PavModal 
+          item={selectedPav} 
+          onClose={() => selectPav(null)}
+        />
+      )}
     </MobileLayout>
   )
 }

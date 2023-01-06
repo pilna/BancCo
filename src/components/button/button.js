@@ -13,6 +13,7 @@ const Button = ({
   fontSize,
   fontWeight,
   backgroundColor,
+  borderRadius,
   width = 50,
   labelOrientation = "lower",
   fullWidth = false
@@ -45,6 +46,7 @@ const Button = ({
         justifyContent: labelIsOnRow ? "space-between" : "center",
         flexDirection: labelIsOnRow ? "row" : "column",
         width: fullWidth ? "100%" : width,
+        borderRadius: borderRadius || 8,
       }}
     >
       {labelBeforeImage && (

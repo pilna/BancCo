@@ -45,6 +45,11 @@ export class ButtonBuilder {
     return this
   }
 
+  setBorderRadius(radius) {
+    this.props.borderRadius = radius
+    return this
+  }
+
   setFontWeight(weight) {
     this.props.fontWeight = weight
     return this

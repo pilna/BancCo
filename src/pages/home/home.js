@@ -3,14 +3,8 @@ import { Text, View } from 'react-native'
 import React from 'react'
 import { routes } from '../../router/routes'
 import { styles } from './home.style'
-import { usePav } from '../../hooks/usePav';
-import { useVoiries } from '../../hooks/useVoiries';
 
 const HomePage = ({ navigation }) => {
-  const { loading, error, voiries } = useVoiries();
-
-  console.log("pav", JSON.stringify(voiries, undefined, 2))
-
   return (
     <View style={styles.homePageContainer}>
       <Text style={{
