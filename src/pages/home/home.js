@@ -1,18 +1,14 @@
-import React, { useEffect } from 'react'
 import { Text, View } from 'react-native'
 
-import { BanccoService } from '../../services/bancco.service'
-import axios from 'axios'
+import React from 'react'
 import { routes } from '../../router/routes'
 import { styles } from './home.style'
+import { usePav } from '../../hooks/usePav'
 
 const HomePage = ({ navigation }) => {
+  const { loading, error, pav } = usePav();
 
-  useEffect(() => {
-    BanccoService.getSuggestions()
-    BanccoService.getVoiries()
-    BanccoService.getPav()
-  }, [])
+  console.log("pav", pav);
 
   return (
     <View style={styles.homePageContainer}>

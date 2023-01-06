@@ -11,11 +11,12 @@ export const usePav = () => {
     setLoading(true);
     setError(false);
 
-    service.getFeatureAsList(service.features.pav)
-      .then((data) => {
-        setPav(data)
+    service.getPav()
+      .then(response => {
+        setPav(response);
       })
-      .catch(() => {
+      .catch(error => {
+        console.log("error", error)
         setError(true);
       });
     

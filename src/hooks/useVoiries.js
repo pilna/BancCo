@@ -11,11 +11,12 @@ export const useVoiries = () => {
     setLoading(true);
     setError(false);
 
-    service.getFeatureAsList(service.features.voiries)
-      .then((data) => {
-        setVoiries(data)
+    service.getVoiries()
+      .then(response => {
+        setVoiries(response);
       })
-      .catch(() => {
+      .catch(error => {
+        console.log("error", error)
         setError(true);
       });
     

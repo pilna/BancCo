@@ -12,11 +12,12 @@ export const useSuggestions = () => {
     setLoading(true);
     setError(false);
 
-    service.getFeatureAsList(service.features.suggestions)
-      .then((data) => {
-        setSuggestions(data)
+    service.getSuggestions()
+      .then(response => {
+        setSuggestions(response);
       })
-      .catch(() => {
+      .catch(error => {
+        console.log("error", error)
         setError(true);
       });
     

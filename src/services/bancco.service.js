@@ -52,11 +52,11 @@ const getVoiries = async () => {
 const getPav = async () => {
   return axios.get(_buildRequestUrl(requestType.PAV))
     .then((response) => (
-      console.log("pav", response.data)
+      response.data
     ))
-    .catch((error) => {
-      console.log("error", error)
-    })
+    .catch((error) => (
+      error
+    ))
 }
 
 export const BanccoService = {
