@@ -1,3 +1,4 @@
+import { XMLParser } from "fast-xml-parser";
 import axios from "axios";
 
 const defaultOptions = {
@@ -29,10 +30,16 @@ const _buildRequestUrl = (requestType, options) => {
   return _buildUrlWithOptions(options) + `&typeName=${requestType}`;
 }
 
+const _parseResponse = (response) => {
+  const parser = new XMLParser();
+  const parsed = parser.parse(response.data);
+  return parsed["wfs:FeatureCollection"]["wfs:member"];
+}
+
 const getSuggestions = async () => {
   return axios.get(_buildRequestUrl(requestType.SUGGESTIONS))
     .then((response) => (
-      console.log("suggestions", response.data)
+      _parseResponse(response)
     ))
     .catch((error) => {
       console.log("error", error)
@@ -42,7 +49,7 @@ const getSuggestions = async () => {
 const getVoiries = async () => {
   return axios.get(_buildRequestUrl(requestType.VOIRIES))
     .then((response) => (
-      console.log("voiries", response.data)
+      _parseResponse(response)
     ))
     .catch((error) => {
       console.log("error", error)
@@ -52,7 +59,7 @@ const getVoiries = async () => {
 const getPav = async () => {
   return axios.get(_buildRequestUrl(requestType.PAV))
     .then((response) => (
-      response.data
+      _parseResponse(response)
     ))
     .catch((error) => (
       error

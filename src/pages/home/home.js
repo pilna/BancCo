@@ -3,12 +3,12 @@ import { Text, View } from 'react-native'
 import React from 'react'
 import { routes } from '../../router/routes'
 import { styles } from './home.style'
-import { usePav } from '../../hooks/usePav'
+import { useSuggestions } from '../../hooks/useSuggestions';
 
 const HomePage = ({ navigation }) => {
-  const { loading, error, pav } = usePav();
+  const { loading, error, suggestions } = useSuggestions();
 
-  console.log("pav", pav);
+  console.log("sugestions", JSON.stringify(suggestions, undefined, 2))
 
   return (
     <View style={styles.homePageContainer}>
