@@ -10,6 +10,7 @@ import { usePavStatus } from '../../hooks/usePavStatus';
 const PavModal = ({ item, onClose }) => {
   const buttonFactory = new ButtonFactory();
   const { pavIsOpen } = usePavStatus();
+  const itemIsOpen = pavIsOpen(item);
 
   return (
     <View style={styles.modalContainer}>
@@ -20,7 +21,7 @@ const PavModal = ({ item, onClose }) => {
         <Close width={20} height={20} fill="#000" />
       </View>
       <View style={styles.pavModelContainer}>
-        <Text style={styles.pavModalTitle}>Point d'apport</Text>
+        <Text style={styles.pavModalTitle}>Point d'apport {item.garbageType}</Text>
         
         <View style={styles.pavModalInformationContainer}>
           <Image style={{ 
@@ -40,14 +41,14 @@ const PavModal = ({ item, onClose }) => {
               <View style={styles.pavModalOpenStatusContainer}>
                 <Text style={{
                   ...styles.pavModalTextStatus,
-                  color: pavIsOpen(item) ? "green" : "red"
+                  color: itemIsOpen ? "green" : "red"
                 }}>
-                  Ouvert
+                  {itemIsOpen ? "Ouvert" : "Fermé"}
                 </Text>
                 <CircleStatus 
                   width={20} 
                   height={20} 
-                  fill={pavIsOpen(item) ? "green" : "red"} 
+                  fill={ itemIsOpen ? "green" : "red"} 
                 />
               </View>
             </View>

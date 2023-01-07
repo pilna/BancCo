@@ -1,17 +1,80 @@
-import MapView, { Marker } from 'react-native-maps'
-
-import { MobileLayout } from '../../layout'
-import { PavModal } from '../../components';
-import React, {useEffect, useState} from 'react'
-import { usePav } from '../../hooks/usePav';
-import { useSelectedPav } from '../../hooks/useSelectedPav';
-import MapViewDirections from "react-native-maps-directions";
 import * as Location from 'expo-location';
 
+import MapView, { Marker } from 'react-native-maps'
+import React, {useEffect, useMemo, useState} from 'react'
+
+import { Image } from 'react-native'
+import MapViewDirections from "react-native-maps-directions";
+import { MobileLayout } from '../../layout'
+import { PavModal } from '../../components';
+import defectiveContainerIcon from '../../../assets/defective-container.png'
+import { usePav } from '../../hooks/usePav';
+import { usePavStatus } from '../../hooks/usePavStatus';
+import { usePinIcon } from '../../hooks/usePinIcon';
+import { useSelectedPav } from '../../hooks/useSelectedPav';
 
 const ExplorePage = ({ navigation }) => {
   const { loading, error, pav } = usePav();
   const { selectedPav, selectPav } = useSelectedPav();
+  const { getPinIcon } = usePinIcon();
+  const { pavIsOpen } = usePavStatus();
+  const mapView = useMemo(() => (
+    <MapView 
+      initialRegion={{
+        latitude: 47.9027336,
+        longitude: 1.9086066,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      }}
+      style={{
+        width: '100%',
+        height: '100%'
+      }}
+
+      showsUserLocation
+      showsMyLocationButton
+      showsCompass
+      showsScale
+      loadingEnabled
+    >
+      {pav && pav.map((item, index) => (
+        <Marker
+          key={index}
+          coordinate={{
+            latitude: item.coordinate.lattitude,
+            longitude: item.coordinate.longitude,
+          }}
+          onPress={() => {
+            selectPav(item);
+          }}
+        >
+          <Image 
+            source={ pavIsOpen(item) && !item.defective ? (
+                getPinIcon(item.garbageType)
+              ) : (
+                defectiveContainerIcon
+              )
+            }
+            style={{
+              width: 20,
+              height: 20,
+            }}
+          />
+        </Marker>
+      ))}
+
+        {/* <Marker coordinate={origin} />
+        <Marker coordinate={destination} />
+        <MapViewDirections
+            origin={origin}
+            destination={destination}
+            apikey={GOOGLE_MAPS_APIKEY}
+            strokeWidth={3}
+            strokeColor="hotpink"
+        /> */}
+
+    </MapView>
+  ), [pav])
 
 
     const [location, setLocation] = useState(null);
@@ -37,7 +100,6 @@ const ExplorePage = ({ navigation }) => {
     } else if (location) {
         text = JSON.stringify(location);
     }
-    console.log("text", text)
 
 
     let moche1;
@@ -61,53 +123,11 @@ const ExplorePage = ({ navigation }) => {
 
 
 
-
+    console.log("refresh")
 
     return (
     <MobileLayout navigation={navigation}>
-      <MapView 
-        initialRegion={{
-          latitude: 47.9027336,
-          longitude: 1.9086066,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        style={{
-          width: '100%',
-          height: '100%'
-        }}
-
-        showsUserLocation
-        showsMyLocationButton
-        showsCompass
-        showsScale
-        loadingEnabled
-      >
-        {pav && pav.map((item, index) => (
-          <Marker
-            key={index}
-            coordinate={{
-              latitude: item.coordinate.lattitude,
-              longitude: item.coordinate.longitude,
-            }}
-            pinColor="purple"
-            onPress={() => {
-              selectPav(item);
-            }}
-          />
-        ))}
-
-          <Marker coordinate={origin} />
-          <Marker coordinate={destination} />
-          <MapViewDirections
-              origin={origin}
-              destination={destination}
-              apikey={GOOGLE_MAPS_APIKEY}
-              strokeWidth={3}
-              strokeColor="hotpink"
-          />
-
-      </MapView>
+      {mapView}
 
       {selectedPav && (
         <PavModal 
