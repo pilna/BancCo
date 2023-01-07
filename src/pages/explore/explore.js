@@ -76,6 +76,7 @@ const ExplorePage = ({ navigation }) => {
     </MapView>
   ), [pav])
 
+    /** 
 
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
@@ -120,7 +121,7 @@ const ExplorePage = ({ navigation }) => {
         latitude: 47.9027336,
         longitude: 1.9086066,};
     const GOOGLE_MAPS_APIKEY = 'AIzaSyBlhYWOi17iTeIgISCWBxtCTjdufXscqdM';
-
+    */
 
 
     console.log("refresh")
