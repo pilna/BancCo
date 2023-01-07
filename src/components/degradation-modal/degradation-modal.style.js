@@ -15,46 +15,46 @@ export const styles = StyleSheet.create({
         bottom: 0,
         padding: 10,
     },
-    pavModelContainer: {
+    degModelContainer: {
         flexDirection: "column",
         alignItems: "center",
     },
-    pavModalTitle: {
+    degModalTitle: {
         fontWeight: "bold",
         fontSize: 16,
         paddingVertical: 10,
     },
-    pavModalInformationContainer: {
+    degModalInformationContainer: {
         paddingHorizontal: 30,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
         width: "100%"
     },
-    pavModalStreet: {
+    degModalStreet: {
         width: "100%",
         paddingHorizontal: 30,
     },
-    pavModalRightSideInformation: {
+    degModalRightSideInformation: {
         height: 100,
         paddingLeft: 20,
         flexDirection: "column",
         flex: 1,
         justifyContent: "space-between",
     },
-    pavModalRow: {
+    degModalRow: {
         flexDirection: "row",
         justifyContent: "space-between",
     },
-    pavModalTextStatus: {
+    degModalTextStatus: {
         marginRight: 5,
         fontWeight: "bold",
     },
-    pavModalOpenStatusContainer: {
+    degModalOpenStatusContainer: {
         flexDirection: "row",
         alignItems: "center",
     },
-    loginInputLabel: {
+    degInputLabel: {
         fontSize: 16,
         marginBottom: 4,
     },

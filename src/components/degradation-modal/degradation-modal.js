@@ -4,7 +4,6 @@ import Close from "../../../assets/close.svg";
 import {ButtonFactory} from "../button";
 import { styles } from './degradation-modal.style';
 import { useDegradation } from "./degradation.logic";
-import {routes} from "../../router";
 const DegradationModal = ( item, onClose) => {
     const {
         Degradation,
@@ -25,8 +24,8 @@ const DegradationModal = ( item, onClose) => {
             >
                 <Close width={20} height={20} fill="#000" />
             </View>
-            <View style={styles.pavModelContainer}>
-                <Text style={styles.pavModalTitle}>Dégradation {item.garbageType}</Text>
+            <View style={styles.degModelContainer}>
+                <Text style={styles.degModalTitle}>Dégradation {item.garbageType}</Text>
 
                 <Image style={{
                     backgroundColor: "red",
@@ -34,12 +33,12 @@ const DegradationModal = ( item, onClose) => {
                     height: 100,
                     borderRadius: 10,
                 }} />
-                <Text style={styles.loginInputLabel}>
+                <Text style={styles.degInputLabel}>
                     Localisation
                 </Text>
 
-                <Text style={styles.pavModalStreet}>{ item.streetName }</Text>
-                <Text style={styles.loginInputLabel}>
+                <Text style={styles.degModalStreet}>{ item.streetName }</Text>
+                <Text style={styles.degInputLabel}>
                     Nature des dégradations
                 </Text>
                 <TextInput
@@ -48,7 +47,7 @@ const DegradationModal = ( item, onClose) => {
                     value={NatureDegradation}
                     placeholder="Détails"
                 />
-                <Text style={styles.loginInputLabel}>
+                <Text style={styles.degInputLabel}>
                     Mobilier touché
                 </Text>
                 <TextInput
