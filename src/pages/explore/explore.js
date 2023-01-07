@@ -1,17 +1,19 @@
 import * as Location from 'expo-location';
 
+import { FilterModal, PavModal } from '../../components';
 import MapView, { Marker } from 'react-native-maps'
 import React, {useEffect, useMemo, useState} from 'react'
 
 import { Image } from 'react-native'
 import MapViewDirections from "react-native-maps-directions";
 import { MobileLayout } from '../../layout'
-import { PavModal } from '../../components';
 import defectiveContainerIcon from '../../../assets/defective-container.png'
+import { useFiler } from '../../hooks/useFilter';
 import { usePav } from '../../hooks/usePav';
 import { usePavStatus } from '../../hooks/usePavStatus';
 import { usePinIcon } from '../../hooks/usePinIcon';
 import { useSelectedPav } from '../../hooks/useSelectedPav';
+import { useToggle } from '../../hooks/useToggle';
 import { useVoiries } from '../../hooks/useVoiries';
 
 const ExplorePage = ({ navigation }) => {
@@ -20,6 +22,8 @@ const ExplorePage = ({ navigation }) => {
   const { selectedPav, selectPav } = useSelectedPav();
   const { getPinIcon } = usePinIcon();
   const { pavIsOpen } = usePavStatus();
+  const { filterValues } = useFiler();
+  const [showFilterModal, setShowFilterModal] = useToggle(true);
 
   const pavMarkers = useMemo(() => (
     <>
@@ -154,6 +158,13 @@ const ExplorePage = ({ navigation }) => {
         <PavModal 
           item={selectedPav} 
           onClose={() => selectPav(null)}
+        />
+      )}
+      {showFilterModal && (
+        <FilterModal
+          filterValues={filterValues}
+          onApplyFilter={(filters) => console.log(filters)}
+          onClose={() => setShowFilterModal(false)}
         />
       )}
     </MobileLayout>
