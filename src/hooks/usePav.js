@@ -13,7 +13,7 @@ export const usePav = () => {
 
     service.getPav()
       .then(response => {
-        setPav(response.slice(0, 100));
+        setPav(response);
       })
       .catch(error => {
         console.log("error", error)
