@@ -71,12 +71,15 @@ const getVoiries = async () => {
           id: voirie["orleans:espaces_verts_voirie"]["@_gml:id"],
           objectid: voirie["orleans:espaces_verts_voirie"]["orleans:objectid"],
           description: voirie["orleans:espaces_verts_voirie"]["orleans:descriptio"],
+          defective: voirie["orleans:espaces_verts_voirie"]["orleans:defective"],
           coordinate: {
             lattitude: parseFloat(voirie["orleans:espaces_verts_voirie"]["orleans:wkb_geometry"]["gml:Point"]["gml:pos"].split(" ")[0]),
             longitude: parseFloat(voirie["orleans:espaces_verts_voirie"]["orleans:wkb_geometry"]["gml:Point"]["gml:pos"].split(" ")[1]),
           }
         }
       })
+
+      console.log(JSON.stringify(voiries.slice(0, 10), null, 2));
 
       return voiries;
     })

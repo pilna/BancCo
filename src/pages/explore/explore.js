@@ -12,31 +12,17 @@ import { usePav } from '../../hooks/usePav';
 import { usePavStatus } from '../../hooks/usePavStatus';
 import { usePinIcon } from '../../hooks/usePinIcon';
 import { useSelectedPav } from '../../hooks/useSelectedPav';
+import { useVoiries } from '../../hooks/useVoiries';
 
 const ExplorePage = ({ navigation }) => {
-  const { loading, error, pav } = usePav();
+  const { pav } = usePav();
+  const { voiries } = useVoiries();
   const { selectedPav, selectPav } = useSelectedPav();
   const { getPinIcon } = usePinIcon();
   const { pavIsOpen } = usePavStatus();
-  const mapView = useMemo(() => (
-    <MapView 
-      initialRegion={{
-        latitude: 47.9027336,
-        longitude: 1.9086066,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }}
-      style={{
-        width: '100%',
-        height: '100%'
-      }}
 
-      showsUserLocation
-      showsMyLocationButton
-      showsCompass
-      showsScale
-      loadingEnabled
-    >
+  const pavMarkers = useMemo(() => (
+    <>
       {pav && pav.map((item, index) => (
         <Marker
           key={index}
@@ -62,19 +48,37 @@ const ExplorePage = ({ navigation }) => {
           />
         </Marker>
       ))}
+    </>
+  ), [pav, selectPav, getPinIcon, pavIsOpen]);
 
-        {/* <Marker coordinate={origin} />
-        <Marker coordinate={destination} />
-        <MapViewDirections
-            origin={origin}
-            destination={destination}
-            apikey={GOOGLE_MAPS_APIKEY}
-            strokeWidth={3}
-            strokeColor="hotpink"
-        /> */}
-
-    </MapView>
-  ), [pav])
+  const voiriesMarkers = useMemo(() => (
+    <>
+      {voiries && voiries.map((item, index) => (
+        <Marker
+          key={index}
+          coordinate={{
+            latitude: item.coordinate.lattitude,
+            longitude: item.coordinate.longitude,
+          }}
+          onPress={() => {
+            console.log(item)
+          }}
+        >
+          <Image
+            source={!item.defective ? (
+              getPinIcon(item.description)
+              ) : (
+                defectiveContainerIcon
+              )}
+            style={{
+              width: 20,
+              height: 20,
+            }}
+          />
+        </Marker>
+      ))}
+    </>
+  ), [voiries]);
 
     /** 
 
@@ -123,12 +127,28 @@ const ExplorePage = ({ navigation }) => {
     const GOOGLE_MAPS_APIKEY = 'AIzaSyBlhYWOi17iTeIgISCWBxtCTjdufXscqdM';
     */
 
-
-    console.log("refresh")
-
     return (
     <MobileLayout navigation={navigation}>
-      {mapView}
+      <MapView 
+        initialRegion={{
+          latitude: 47.9027336,
+          longitude: 1.9086066,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+        style={{
+          width: '100%',
+          height: '100%'
+        }}
+
+        showsUserLocation
+        showsMyLocationButton
+        showsCompass
+        showsScale
+        loadingEnabled
+      >
+        {voiriesMarkers}
+      </MapView>
 
       {selectedPav && (
         <PavModal 
