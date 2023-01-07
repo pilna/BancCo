@@ -24,7 +24,6 @@ export const usePav = () => {
   }
 
   useEffect(() => {
-    console.log("refetch")
     fetchPavs();
   }, []);
 

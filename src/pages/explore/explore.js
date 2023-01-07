@@ -1,10 +1,11 @@
 import * as Location from 'expo-location';
 
 import { FilterModal, PavModal } from '../../components';
+import { Image, View } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import React, {useEffect, useMemo, useState} from 'react'
 
-import { Image } from 'react-native'
+import { ButtonFactory } from '../../components/button/button.factory';
 import MapViewDirections from "react-native-maps-directions";
 import { MobileLayout } from '../../layout'
 import defectiveContainerIcon from '../../../assets/defective-container.png'
@@ -17,6 +18,7 @@ import { useToggle } from '../../hooks/useToggle';
 import { useVoiries } from '../../hooks/useVoiries';
 
 const ExplorePage = ({ navigation }) => {
+  const buttonFactory = new ButtonFactory();
   const { pav } = usePav();
   const { voiries } = useVoiries();
   const { selectedPav, selectPav } = useSelectedPav();
@@ -133,6 +135,19 @@ const ExplorePage = ({ navigation }) => {
 
     return (
     <MobileLayout navigation={navigation}>
+      {!showFilterModal && (
+        <View style={{
+          position: 'absolute',
+          bottom: 10,
+          right: 10,
+          zIndex: 2
+        }}>
+          {buttonFactory.createGlobButton(
+            () => setShowFilterModal(true)
+          )}
+        </View>
+      )}
+      
       <MapView 
         initialRegion={{
           latitude: 47.9027336,

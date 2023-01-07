@@ -12,6 +12,7 @@ export class ButtonFactory {
     return new ButtonBuilder()
       .withIcon(<GlobeIcon width={36} height={36} />)
       .withOnClick(onClick)
+      .setBackgroundColor("#fff")
       .build()
   }
 

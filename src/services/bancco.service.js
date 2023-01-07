@@ -79,8 +79,6 @@ const getVoiries = async () => {
         }
       })
 
-      console.log(JSON.stringify(voiries.slice(0, 10), null, 2));
-
       return voiries;
     })
     .catch((error) => {
