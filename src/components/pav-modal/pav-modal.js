@@ -40,8 +40,9 @@ const PavModal = ({ item, onClose }) => {
           <View style={styles.pavModalRightSideInformation}>
             <View style={styles.pavModalRow}>
               <View>
-                <Text>Distance</Text>
-                <Text>30 m</Text>
+                <Text>{item.defective ? "Défectueux" : item.openHours}</Text>
+
+
               </View>
 
               <View style={styles.pavModalOpenStatusContainer}>
@@ -59,12 +60,16 @@ const PavModal = ({ item, onClose }) => {
               </View>
             </View>
 
-            <View style={styles.pavModalRow}>
+            <View style={styles.pavModalRow} >
               <View style={{ width: "45%" }}>
-                {buttonFactory.createTextButton(
-                  "Dégradation",
-                  () => selectDegradation(item),
-                  "red"
+                {itemIsOpen ? (
+                    buttonFactory.createTextButton(
+                        "Dégradation",
+                        () => selectDegradation(item),
+                        "red"
+                    )
+                ) : (
+                    <View style={{ display: "none" }} />
                 )}
               </View>
 
