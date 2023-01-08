@@ -10,6 +10,7 @@ import {useDegradation} from "../../hooks/useDegradation";
 import { usePavStatus } from '../../hooks/usePavStatus';
 import {usePinIcon} from "../../hooks/usePinIcon";
 
+
 const PavModal = ({ item, onClose }) => {
   const buttonFactory = new ButtonFactory();
   const { pavIsOpen } = usePavStatus();

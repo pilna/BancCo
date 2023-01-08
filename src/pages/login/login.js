@@ -1,10 +1,11 @@
-import { Text, TextInput, View } from 'react-native'
+import {Image, Text, TextInput, View} from 'react-native'
 
 import { ButtonFactory } from '../../components/button/button.factory';
 import React from 'react'
 import { routes } from '../../router/routes';
 import { styles } from './login.style';
 import { useLogin } from './login.logic';
+import logo from '../../../assets/bancco.png'
 
 const LoginPage = ({ navigation }) => {
   const { 
@@ -19,12 +20,7 @@ const LoginPage = ({ navigation }) => {
   return (
     <View style={styles.loginPageContainer}>
       <View style={styles.topContentContainer}>
-        <Text style={{
-          ...styles.colorizedText,
-          ...styles.loginTitle
-        }}>
-          Banc.co
-        </Text>
+        <Image source={logo} style={{width: 200, height: 50 }}/>
         
         <Text style={{
           ...styles.colorizedText,

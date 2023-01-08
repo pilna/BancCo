@@ -1,19 +1,15 @@
-import { Text, View } from 'react-native'
+import {Image, Text, View} from 'react-native'
 
 import { BanccoService } from '../../services/bancco.service'
 import React from 'react'
 import { routes } from '../../router/routes'
 import { styles } from './home.style'
+import logo from "../../../assets/bancco.png";
 
 const HomePage = ({ navigation }) => {
   return (
     <View style={styles.homePageContainer}>
-      <Text style={{
-        ...styles.colorized,
-        ...styles.title
-      }}>
-        Banc.co
-      </Text>
+      <Image source={logo} style={{width: 200, height: 50 }}/>
       
       <Text style={styles.descriptionText}>
         We are millions of members exploring and

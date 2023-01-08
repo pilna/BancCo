@@ -9,6 +9,7 @@ import { ButtonFactory } from '../../components/button/button.factory';
 import MapViewDirections from "react-native-maps-directions";
 import { MobileLayout } from '../../layout'
 import defectiveContainerIcon from '../../../assets/defective-container.png'
+import redCross from '../../../assets/defective.png'
 import { useFiler } from '../../hooks/useFilter';
 import { usePav } from '../../hooks/usePav';
 import { usePavStatus } from '../../hooks/usePavStatus';
@@ -77,7 +78,7 @@ const ExplorePage = ({ navigation }) => {
             source={!item.defective ? (
               getPinIcon(item.description)
               ) : (
-                defectiveContainerIcon
+                redCross
               )}
             style={{
               width: 20,
