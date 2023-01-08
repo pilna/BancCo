@@ -3,11 +3,11 @@ import { Image, Text, View } from 'react-native';
 import { ButtonFactory } from '../button/button.factory';
 import CircleStatus from '../../../assets/circle-status.svg'
 import Close from '../../../assets/close.svg'
+import {DegradationModal} from "../degradation-modal";
 import React from 'react'
 import { styles } from './pav-modal.style';
-import { usePavStatus } from '../../hooks/usePavStatus';
 import {useDegradation} from "../../hooks/useDegradation";
-import {DegradationModal} from "../degradation-modal";
+import { usePavStatus } from '../../hooks/usePavStatus';
 
 const PavModal = ({ item, onClose }) => {
   const buttonFactory = new ButtonFactory();
@@ -17,12 +17,15 @@ const PavModal = ({ item, onClose }) => {
 
   return (
     <View style={styles.modalContainer}>
-      <View 
-        style={styles.closeContainer}
-        onTouchEnd={onClose}
-      >
-        <Close width={20} height={20} fill="#000" />
-      </View>
+      {!selectedDegradation && (
+        <View 
+          style={styles.closeContainer}
+          onTouchEnd={onClose}
+        >
+          <Close width={20} height={20} fill="#000" />
+        </View>
+      )
+      }
       <View style={styles.pavModelContainer}>
         <Text style={styles.pavModalTitle}>Point d'apport {item.garbageType}</Text>
         
@@ -79,11 +82,12 @@ const PavModal = ({ item, onClose }) => {
 
         <Text style={styles.pavModalStreet}>{ item.streetName }</Text>
       </View>
+      
       {selectedDegradation && (
-          <DegradationModal
-              item={selectedDegradation}
-              onClose={() => selectDegradation(null)}
-          />
+        <DegradationModal
+          item={selectedDegradation}
+          onClose={() => selectDegradation(null)}
+        />
       )}
     </View>
 

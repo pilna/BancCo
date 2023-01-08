@@ -136,7 +136,7 @@ const ExplorePage = ({ navigation }) => {
 
     return (
     <MobileLayout navigation={navigation}>
-      {!showFilterModal && (
+      {!showFilterModal && !selectedPav && (
         <View style={{
           position: 'absolute',
           bottom: 10,

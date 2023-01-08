@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     bottom: 0,
-    padding: 10,
+    padding: 0,
   },
   pavModelContainer: {
     flexDirection: "column",

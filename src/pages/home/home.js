@@ -1,5 +1,6 @@
 import { Text, View } from 'react-native'
 
+import { BanccoService } from '../../services/bancco.service'
 import React from 'react'
 import { routes } from '../../router/routes'
 import { styles } from './home.style'

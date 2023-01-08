@@ -1,17 +1,15 @@
+import { BanccoService } from '../../services/bancco.service';
 import { useState } from 'react';
-export const useDegradation = () => {
 
-    const [Degradation, setDegradation] = useState('');
+export const useDegradation = (itemId) => {
     const [NatureDegradation, setNatureDegradation] = useState('');
 
     const onDegradation = () => {
-        // TODO
-        console.log(Degradation, NatureDegradation);
+        console.log("item id", itemId);
+        BanccoService.postDegradation(itemId, NatureDegradation)
     }
 
     return {
-        Degradation,
-        setDegradation,
         NatureDegradation,
         setNatureDegradation,
         onDegradation
