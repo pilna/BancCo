@@ -13,7 +13,7 @@ import { useSuggestions } from '../../hooks/useSuggestions';
 
 const AdminMapPage = ({ navigation }) => {
   const { suggestions } = useSuggestions();
-  const { defectivesItem } = useDefective();
+  const { defectivesItem, updateDefectiveItem } = useDefective();
   const { selectPav, selectedPav } = useSelectedPav();
 
   return (
@@ -76,6 +76,7 @@ const AdminMapPage = ({ navigation }) => {
       {selectedPav && (
         <ReparationModal
           item={selectedPav}
+          onReparation={updateDefectiveItem}
           onClose={() => selectPav(null)}
         />
       )}

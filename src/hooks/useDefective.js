@@ -17,11 +17,18 @@ export const useDefective = () => {
     ]);
   }
 
+  const updateDefectiveItem= (itemId) => {
+    const item = defectivesItem.find(item => item.id === itemId);
+    item.defective = false;
+    setDefectivesItem(defectivesItem.filter(item => item.defective === true));
+  }
+
   useEffect(() => {
     fetchDefectives();
   }, [pav, voiries]);
 
   return {
     defectivesItem,
+    updateDefectiveItem
   }
 }

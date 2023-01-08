@@ -6,7 +6,7 @@ import Close from '../../../assets/close.svg'
 import React from 'react'
 import { styles } from './reparation-modal.style';
 
-const ReparationModal = ({ item, onClose }) => {
+const ReparationModal = ({ item, onReparation, onClose }) => {
   const buttonFactory = new ButtonFactory();
   
   return (
@@ -23,6 +23,7 @@ const ReparationModal = ({ item, onClose }) => {
         {buttonFactory.createSubmitButton(
           "Réparer", 
           () => {
+            onReparation(item.id);
             BanccoService.postReperation(item.id);
             onClose();
           }
