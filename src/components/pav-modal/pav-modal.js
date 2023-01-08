@@ -27,7 +27,9 @@ const PavModal = ({ item, onClose }) => {
       )
       }
       <View style={styles.pavModelContainer}>
-        <Text style={styles.pavModalTitle}>Point d'apport {item.garbageType}</Text>
+        <Text style={styles.pavModalTitle}>
+          {item.garbageType ? `point d'apport ${item.garbageType}` : item.description}
+        </Text>
         
         <View style={styles.pavModalInformationContainer}>
           <Image style={{ 
@@ -37,32 +39,33 @@ const PavModal = ({ item, onClose }) => {
             borderRadius: 10,
           }} />
           
-          <View style={styles.pavModalRightSideInformation}>
-            <View style={styles.pavModalRow}>
-              <View>
-                <Text>{item.defective ? "Défectueux" : item.openHours}</Text>
+          
+            <View style={styles.pavModalRightSideInformation}>
+              {item.openHours && (
+                <View style={styles.pavModalRow}>
+                  <View>
+                    <Text>{item.defective ? "Défectueux" : item.openHours}</Text>
+                  </View>
 
-
-              </View>
-
-              <View style={styles.pavModalOpenStatusContainer}>
-                <Text style={{
-                  ...styles.pavModalTextStatus,
-                  color: itemIsOpen ? "green" : "red"
-                }}>
-                  {itemIsOpen ? "Ouvert" : "Fermé"}
-                </Text>
-                <CircleStatus 
-                  width={20} 
-                  height={20} 
-                  fill={ itemIsOpen ? "green" : "red"} 
-                />
-              </View>
-            </View>
+                  <View style={styles.pavModalOpenStatusContainer}>
+                    <Text style={{
+                      ...styles.pavModalTextStatus,
+                      color: itemIsOpen ? "green" : "red"
+                    }}>
+                      {itemIsOpen ? "Ouvert" : "Fermé"}
+                    </Text>
+                    <CircleStatus 
+                      width={20} 
+                      height={20} 
+                      fill={ itemIsOpen ? "green" : "red"} 
+                    />
+                  </View>
+                </View>
+              )}
 
             <View style={styles.pavModalRow} >
               <View style={{ width: "45%" }}>
-                {itemIsOpen ? (
+                {!item.defective ? (
                     buttonFactory.createTextButton(
                         "Dégradation",
                         () => selectDegradation(item),

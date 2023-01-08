@@ -14,7 +14,7 @@ export const navigationConfig = {
     {
       icon: <ArrowUpCircle width={36} height={36} />,
       label: "Suggestions",
-      to: routes.visuSuggestion
+      to: routes.adminMap
     },
     {
       icon: <Map width={36} height={36} />,

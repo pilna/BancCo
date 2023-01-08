@@ -68,7 +68,7 @@ const ExplorePage = ({ navigation }) => {
             longitude: item.coordinate.longitude,
           }}
           onPress={() => {
-            console.log(item)
+            selectPav(item);
           }}
         >
           <Image

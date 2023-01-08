@@ -5,6 +5,5 @@ export const routes = {
   explore: "explore",
   profile: "profile",
   promotedTrail: "promotedTrail",
-  recordTrail: "recordTrail",
-  visuSuggestion: "visuSuggestion",
+  adminMap: "adminMap",
 }
