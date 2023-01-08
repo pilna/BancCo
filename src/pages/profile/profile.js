@@ -2,9 +2,7 @@ import { MobileLayout } from '../../layout'
 import React from 'react'
 import {Image, ImageBackground, Text, Button, View, Alert} from 'react-native'
 import {styles} from './profile.style'
-import {ButtonFactory} from "../../components";
 
-const buttonFactory = new ButtonFactory();
 
 const ProfilePage = ({ navigation }) => {
   return (
@@ -88,68 +86,4 @@ const ProfilePage = ({ navigation }) => {
 
   )
 }
-
-
-/*
-
-
-const LoginPage = ({ navigation }) => {
-
-  return (
-    <View style={styles.loginPageContainer}>
-      <View style={styles.topContentContainer}>
-        <Text style={{
-          ...styles.colorizedText,
-          ...styles.loginTitle
-        }}>
-          Banc.co
-        </Text>
-
-        <Text style={{
-          ...styles.colorizedText,
-          ...styles.loginTitle
-        }}>
-          Log In
-        </Text>
-
-        <View style={styles.loginInputContainer}>
-          <Text style={styles.loginInputLabel}>
-            E-mail or username
-          </Text>
-
-          <TextInput
-            onChangeText={setEmail}
-            style={styles.loginInputBox}
-            value={email}
-            placeholder="Your E-mail or username"
-          />
-        </View>
-
-        <View style={styles.loginInputContainer}>
-          <Text style={styles.loginInputLabel}>
-            Password
-          </Text>
-
-          <TextInput
-            style={styles.loginInputBox}
-            onChangeText={setPassword}
-            value={password}
-            placeholder="Your Password"
-            secureTextEntry
-          />
-        </View>
-      </View>
-
-      {buttonFactory.createSubmitButton(
-        "Sign In",
-        () => {
-          onLogin();
-          navigation.navigate(routes.explore);
-        }
-      )}
-    </View>
-  )
-}
-
-export default LoginPage*/
 export default ProfilePage
