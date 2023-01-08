@@ -20,6 +20,7 @@ const ReparationModal = ({ item, onReparation, onClose }) => {
         
       <View style={styles.contentContainer}>
         <Text style={styles.title}>{item.garbageType ? `point d'apport ${item.garbageType}` : item.description}</Text>
+          <Text style={styles.title}>{item.defectiveDescription}</Text>
         {buttonFactory.createSubmitButton(
           "Réparer", 
           () => {
