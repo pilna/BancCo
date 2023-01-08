@@ -6,9 +6,9 @@ import CheckBox from "expo-checkbox";
 import Close from '../../../assets/close.svg'
 import { styles } from './filter-modal.style';
 
-const FilterModal = ({ filterValues, onApplyFilter, onClose }) => {
+const FilterModal = ({ currentFilter, filterValues, onApplyFilter, onClose }) => {
   const buttonFactory = new ButtonFactory();
-  const [filters, setFilter] = useState([]);
+  const [filters, setFilter] = useState(currentFilter);
 
   const updateFilter = (filter) => {
     if (filters.includes(filter)) {

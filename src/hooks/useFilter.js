@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export const useFiler = () => {
-  const [filter, setFilter] = useState([]);
+  const [filter, setFilter] = useState(["Banc public"]);
   const filterValues = [
     "verre",
     "text",
@@ -24,8 +24,26 @@ export const useFiler = () => {
     "Grille carrée arbre",
     "Jardinière ronde",
   ]
+
+  const filterPav = (pavItems) => {
+    const filteredPav = pavItems.filter((item) => {
+      return filter.includes(item.garbageType);
+    })
+    return filteredPav;
+  }
+
+  const filterVoiries = (voiriesItems) => {
+    const filteredVoiries = voiriesItems.filter((item) => {
+      return filter.includes(item.description);
+    })
+    return filteredVoiries;
+  }
   
   return {
+    filter,
+    filterPav,
+    filterVoiries,
+    setFilter,
     filterValues
   }
 }

@@ -24,12 +24,12 @@ const ExplorePage = ({ navigation }) => {
   const { selectedPav, selectPav } = useSelectedPav();
   const { getPinIcon } = usePinIcon();
   const { pavIsOpen } = usePavStatus();
-  const { filterValues } = useFiler();
+  const { filter, filterPav, filterVoiries, setFilter, filterValues } = useFiler();
   const [showFilterModal, setShowFilterModal] = useToggle(true);
 
   const pavMarkers = useMemo(() => (
     <>
-      {pav && pav.map((item, index) => (
+      {pav && filterPav(pav).map((item, index) => (
         <Marker
           key={index}
           coordinate={{
@@ -55,11 +55,11 @@ const ExplorePage = ({ navigation }) => {
         </Marker>
       ))}
     </>
-  ), [pav, selectPav, getPinIcon, pavIsOpen]);
+  ), [pav, selectPav, getPinIcon, pavIsOpen, filterPav]);
 
   const voiriesMarkers = useMemo(() => (
     <>
-      {voiries && voiries.map((item, index) => (
+      {voiries && filterVoiries(voiries).map((item, index) => (
         <Marker
           key={index}
           coordinate={{
@@ -84,7 +84,7 @@ const ExplorePage = ({ navigation }) => {
         </Marker>
       ))}
     </>
-  ), [voiries]);
+  ), [voiries, getPinIcon, filterVoiries]);
 
     /** 
 
@@ -175,10 +175,12 @@ const ExplorePage = ({ navigation }) => {
           onClose={() => selectPav(null)}
         />
       )}
+      
       {showFilterModal && (
         <FilterModal
+          currentFilter={filter}
           filterValues={filterValues}
-          onApplyFilter={(filters) => console.log(filters)}
+          onApplyFilter={(filters) => setFilter(filters)}
           onClose={() => setShowFilterModal(false)}
         />
       )}
