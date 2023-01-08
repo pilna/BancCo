@@ -26,7 +26,7 @@ const ExplorePage = ({ navigation }) => {
   const { getPinIcon } = usePinIcon();
   const { pavIsOpen } = usePavStatus();
   const { filter, filterPav, filterVoiries, setFilter, filterValues } = useFiler();
-  const [showFilterModal, setShowFilterModal] = useToggle(true);
+  const [showFilterModal, setShowFilterModal] = useToggle();
 
   const pavMarkers = useMemo(() => (
     <>

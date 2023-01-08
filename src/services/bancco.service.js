@@ -191,10 +191,48 @@ const postSuggestion = async (coordinate, description) => {
   })
 }
 
+const postReperation = async (id) => {
+  return axios.post(
+    baseUrl,
+    `
+    <wfs:Transaction service="WFS" version="1.0.0"
+      xmlns:ogc="http://www.opengis.net/ogc"
+      xmlns:wfs="http://www.opengis.net/wfs"
+    >
+      <wfs:Update typeName="orleans:dechets_pav">
+        <wfs:Property>
+          <wfs:Name>defective</wfs:Name>
+          <wfs:Value>false</wfs:Value>
+        </wfs:Property>
+        <wfs:Property>
+          <wfs:Name>defective_description</wfs:Name>
+          <wfs:Value></wfs:Value>
+        </wfs:Property>
+        <ogc:Filter>
+          <ogc:FeatureId fid="${id}"/>
+        </ogc:Filter>
+      </wfs:Update>
+    </wfs:Transaction>
+    `,
+    {
+      headers: {
+        'Content-Type': 'text/xml',
+      }
+    }
+  )
+  .then((response) => {
+    console.log("response", response)
+  })
+  .catch((error) => {
+    console.log("error", error)
+  })
+}
+
 export const BanccoService = {
   getSuggestions,
   getVoiries,
   getPav,
   postDegradation,
   postSuggestion,
+  postReperation,
 }

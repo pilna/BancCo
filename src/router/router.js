@@ -7,9 +7,9 @@ import PromotedTrailPage from "../pages/promoted-trail/promoted-trail";
 import React from 'react'
 import RecordTrailPage from "../pages/record-trail/record-trail";
 import RegisterPage from "../pages/register/register";
+import VisuSuggestionPage from "../pages/visuSuggestion/visuSuggestion";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { routes } from './routes';
-import VisuSuggestionPage from "../pages/visuSuggestion/visuSuggestion";
 
 const Stack = createNativeStackNavigator();
 

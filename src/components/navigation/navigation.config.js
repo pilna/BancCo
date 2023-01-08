@@ -13,12 +13,12 @@ export const navigationConfig = {
     },
     {
       icon: <ArrowUpCircle width={36} height={36} />,
-      label: "Record Trail",
-      to: routes.recordTrail
+      label: "Suggestions",
+      to: routes.visuSuggestion
     },
     {
       icon: <Map width={36} height={36} />,
-      label: "Promoted Trail",
+      label: "Add suggestion",
       to: routes.promotedTrail
     },
     {
