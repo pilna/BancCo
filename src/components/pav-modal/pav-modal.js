@@ -8,13 +8,15 @@ import React from 'react'
 import { styles } from './pav-modal.style';
 import {useDegradation} from "../../hooks/useDegradation";
 import { usePavStatus } from '../../hooks/usePavStatus';
+import {usePinIcon} from "../../hooks/usePinIcon";
 
 const PavModal = ({ item, onClose }) => {
   const buttonFactory = new ButtonFactory();
   const { pavIsOpen } = usePavStatus();
   const itemIsOpen = pavIsOpen(item);
   const { selectedDegradation, selectDegradation } = useDegradation();
-
+  console.log('item', item);
+  const { getPinIcon } = usePinIcon();
   return (
     <View style={styles.modalContainer}>
       {!selectedDegradation && (
@@ -32,12 +34,13 @@ const PavModal = ({ item, onClose }) => {
         </Text>
         
         <View style={styles.pavModalInformationContainer}>
-          <Image style={{ 
-            backgroundColor: "red",
-            width: 100,
-            height: 100,
-            borderRadius: 10,
-          }} />
+          <Image
+              source={
+                getPinIcon(item.description)}
+              style={{
+                width: 100,
+                height: 100,
+              }}/>
           
           
             <View style={styles.pavModalRightSideInformation}>
@@ -79,7 +82,10 @@ const PavModal = ({ item, onClose }) => {
               <View style={{ width: "45%" }}>
                 {buttonFactory.createTextButton(
                   "Itinéraire",
-                  () => console.log("Itinéraire"),
+                  () => {
+                    console.log(item.coordinate),
+                    onClose()
+                  },
                   "blue"
                 )}
               </View>
