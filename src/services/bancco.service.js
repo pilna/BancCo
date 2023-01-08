@@ -118,7 +118,7 @@ const getPav = async () => {
     ))
 }
 
-const postDegradation = async (itemId, description) => {
+const postDegradation = async (itemId, description, date = new Date()) => {
   return axios.post(
     baseUrl,
     `
@@ -133,7 +133,7 @@ const postDegradation = async (itemId, description) => {
         </wfs:Property>
         <wfs:Property>
           <wfs:Name>defective_description</wfs:Name>
-          <wfs:Value>${description}</wfs:Value>
+          <wfs:Value>${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}  :  ${description}</wfs:Value>
         </wfs:Property>
         <ogc:Filter>
           <ogc:FeatureId fid="${itemId}"/>
@@ -155,7 +155,7 @@ const postDegradation = async (itemId, description) => {
   })
 }
 
-const postSuggestion = async (coordinate, description) => {
+const postSuggestion = async (coordinate, description, date = new Date()) => {
   return axios.post(
     baseUrl,
     `
@@ -168,7 +168,7 @@ const postSuggestion = async (coordinate, description) => {
                           http://schemas.opengis.net/wfs/2.0/wfs.xsd">
       <wfs:Insert>
         <orleans:suggestions>
-            <orleans:type>${description}</orleans:type>
+            <orleans:type>${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}  : ${description}</orleans:type>
             <orleans:wkb_geometry>
               <gml:Point>
                 <gml:pos>${coordinate.lattitude} ${coordinate.longitude}</gml:pos>
