@@ -1,20 +1,28 @@
+import { BanccoService } from '../../services/bancco.service';
 import { useState } from 'react';
 
 export const useSugestion = () => {
     const [pourquoi, setPourquoi] = useState('');
-    const [types, setTypes] = useState('');
     const [position, setPosition] = useState('');
+    const [lattitude, setLattitude] = useState('');
+    const [longitude, setLongitude] = useState('');
 
     const onSuggestion = () => {
-        // TODO
-        console.log(pourquoi, types,position.latitude,position.longitude);
+        BanccoService.postSuggestion({
+            lattitude: lattitude,
+            longitude: longitude,
+        },
+        pourquoi
+        )
     }
 
     return {
+        lattitude,
+        setLattitude,
+        longitude,
+        setLongitude,
         pourquoi,
         setPourquoi,
-        types,
-        setTypes,
         position,
         setPosition,
         onSuggestion

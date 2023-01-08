@@ -154,9 +154,47 @@ const postDegradation = async (itemId, description) => {
   })
 }
 
+const postSuggestion = async (coordinate, description) => {
+  return axios.post(
+    baseUrl,
+    `
+    <wfs:Transaction service="WFS" version="2.0.0"
+      xmlns:wfs="http://www.opengis.net/wfs/2.0"
+      xmlns:orleans="orleans"
+      xmlns:gml="http://www.opengis.net/gml/3.2"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.opengis.net/wfs/2.0
+                          http://schemas.opengis.net/wfs/2.0/wfs.xsd">
+      <wfs:Insert>
+        <orleans:suggestions>
+            <orleans:type>${description}</orleans:type>
+            <orleans:wkb_geometry>
+              <gml:Point>
+                <gml:pos>${coordinate.lattitude} ${coordinate.longitude}</gml:pos>
+              </gml:Point>
+            </orleans:wkb_geometry>
+            </orleans:suggestions>
+      </wfs:Insert>
+    </wfs:Transaction>
+    `,
+    {
+      headers: {
+        'Content-Type': 'text/xml',
+      }
+    }
+  )
+  .then((response) => {
+    console.log("response", response)
+  })
+  .catch((error) => {
+    console.log("error", error)
+  })
+}
+
 export const BanccoService = {
   getSuggestions,
   getVoiries,
   getPav,
   postDegradation,
+  postSuggestion,
 }
