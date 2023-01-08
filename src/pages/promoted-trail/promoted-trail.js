@@ -40,7 +40,7 @@ const PromotedTrailPage = ({ navigation }) => {
   const buttonFactory = new ButtonFactory();
 
   return (
-    <MobileLayout navuseStateigation={navigation}>
+    <MobileLayout navigation={navigation}>
       <View style={styles.profilePageContainer}>
         <ImageBackground source={require ('../../../assets/background.png')} style={styles.backgroundImage} >
           <View style={styles.topContentContainer}>
