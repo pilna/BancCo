@@ -1,4 +1,6 @@
 import ArrowUpCircle from "../../../assets/arrow-up-circle.svg";
+import HammerIcon from "../../../assets/hammer.svg";
+import IdeaIcon from "../../../assets/lamp.svg";
 import Earth from "../../../assets/earth.svg";
 import Map from "../../../assets/map.svg";
 import Profile from "../../../assets/profile.svg";
@@ -8,22 +10,22 @@ export const navigationConfig = {
   items: [
     {
       icon: <Earth width={36} height={36} />,
-      label: "Explore",
+      label: "Explorer",
       to: routes.explore
     },
     {
-      icon: <ArrowUpCircle width={36} height={36} />,
-      label: "Suggestions",
+      icon: <HammerIcon width={36} height={36} fill="#000" />,
+      label: "Réparer",
       to: routes.adminMap
     },
     {
-      icon: <Map width={36} height={36} />,
-      label: "Add suggestion",
+      icon: <IdeaIcon width={36} height={36} fill="#000" />,
+      label: "Suggestion",
       to: routes.promotedTrail
     },
     {
       icon: <Profile width={36} height={36} />,
-      label: "Profile",
+      label: "Profil",
       to: routes.profile
     }
   ]
