@@ -4,3 +4,4 @@ export * from "./stats-modal";
 export * from "./pav-modal";
 export * from "./degradation-modal";
 export * from "./filter-modal";
+export * from "./legende-modal";

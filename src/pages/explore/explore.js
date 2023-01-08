@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 
-import {DegradationModal, FilterModal, PavModal} from '../../components';
+import {DegradationModal, FilterModal, PavModal, LegendeModal} from '../../components';
 import { Image, View } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import React, {useEffect, useMemo, useState} from 'react'
@@ -27,6 +27,8 @@ const ExplorePage = ({ navigation }) => {
   const { pavIsOpen } = usePavStatus();
   const { filter, filterPav, filterVoiries, setFilter, filterValues } = useFiler();
   const [showFilterModal, setShowFilterModal] = useToggle();
+  const [showLegendeModal, setShowLegendeModal] = useToggle();
+
 
   const pavMarkers = useMemo(() => (
     <>
@@ -136,7 +138,7 @@ const ExplorePage = ({ navigation }) => {
 
     return (
     <MobileLayout navigation={navigation}>
-      {!showFilterModal && !selectedPav && (
+      {!showFilterModal && !selectedPav && !showLegendeModal && (
         <View style={{
           position: 'absolute',
           bottom: 10,
@@ -147,6 +149,18 @@ const ExplorePage = ({ navigation }) => {
             () => setShowFilterModal(true)
           )}
         </View>
+      )}
+      {!showFilterModal && !selectedPav && !showLegendeModal && (
+          <View style={{
+            position: 'absolute',
+            bottom: 70,
+            right: 10,
+            zIndex: 2
+          }}>
+            {buttonFactory.createCompassButton(
+                () => setShowLegendeModal(true)
+            )}
+          </View>
       )}
       
       <MapView 
@@ -172,6 +186,11 @@ const ExplorePage = ({ navigation }) => {
       </MapView>
 
 
+      {showLegendeModal && (
+      <LegendeModal
+          filterValues={filterValues}
+        onClose={() => setShowLegendeModal(false)}/>)
+      }
 
       {selectedPav && (
         <PavModal

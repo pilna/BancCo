@@ -20,6 +20,7 @@ export class ButtonFactory {
     return new ButtonBuilder()
       .withIcon(<Compass width={36} height={36} />)
       .withOnClick(onClick)
+        .setBackgroundColor("#fff")
       .build()
   }
 
