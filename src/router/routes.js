@@ -6,4 +6,5 @@ export const routes = {
   profile: "profile",
   promotedTrail: "promotedTrail",
   recordTrail: "recordTrail",
+  visuSuggestion: "visuSuggestion",
 }

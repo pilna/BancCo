@@ -9,6 +9,7 @@ import RecordTrailPage from "../pages/record-trail/record-trail";
 import RegisterPage from "../pages/register/register";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { routes } from './routes';
+import VisuSuggestionPage from "../pages/visuSuggestion/visuSuggestion";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,11 @@ const Router = () => {
         <Stack.Screen
           name={routes.recordTrail}
           component={RecordTrailPage}
+        />
+
+        <Stack.Screen
+            name={routes.visuSuggestion}
+            component={VisuSuggestionPage}
         />
       </Stack.Navigator>
     </NavigationContainer>
