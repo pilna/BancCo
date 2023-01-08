@@ -41,7 +41,7 @@ const ExplorePage = ({ navigation }) => {
           }}
         >
           <Image 
-            source={ pavIsOpen(item) && !item.defective ? (
+            source={ pavIsOpen(item) ? (
                 getPinIcon(item.garbageType)
               ) : (
                 defectiveContainerIcon

@@ -3,6 +3,7 @@ export const usePavStatus = () => {
   const pavIsOpen = (pavItem) => {
     if(!pavItem.openHours) return false
     if(pavItem.openHours === "24/7") return true
+    if(pavItem.defective) return false
     
     const [startString, endString] = pavItem.openHours.split("-")
     const start = new Date();
