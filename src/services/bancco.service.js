@@ -199,7 +199,7 @@ const postReperation = async (id) => {
       xmlns:ogc="http://www.opengis.net/ogc"
       xmlns:wfs="http://www.opengis.net/wfs"
     >
-      <wfs:Update typeName="orleans:dechets_pav">
+      <wfs:Update typeName="orleans:${id.split('.')[0]}">
         <wfs:Property>
           <wfs:Name>defective</wfs:Name>
           <wfs:Value>false</wfs:Value>
