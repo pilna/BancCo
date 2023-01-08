@@ -3,14 +3,18 @@ import MapView, { Marker } from 'react-native-maps'
 import { Image } from 'react-native'
 import MobileLayout from '../../layout/mobile/mobile.layout';
 import React from 'react'
+import ReparationModal from '../../components/reparation-modal/reparation-modal';
 import defectiveIcon from '../../../assets/defective.png'
 import suggestionIcon from '../../../assets/suggestion.png'
 import { useDefective } from '../../hooks/useDefective';
+import { usePav } from '../../hooks/usePav';
+import { useSelectedPav } from '../../hooks/useSelectedPav';
 import { useSuggestions } from '../../hooks/useSuggestions';
 
 const AdminMapPage = ({ navigation }) => {
   const { suggestions } = useSuggestions();
   const { defectivesItem } = useDefective();
+  const { selectPav, selectedPav } = useSelectedPav();
 
   return (
     <MobileLayout navigation={navigation}>
@@ -56,6 +60,7 @@ const AdminMapPage = ({ navigation }) => {
               latitude: defective.coordinate.lattitude,
               longitude: defective.coordinate.longitude,
             }}
+            onPress={() => selectPav(defective)}
           >
             <Image
               source={defectiveIcon}
@@ -67,6 +72,13 @@ const AdminMapPage = ({ navigation }) => {
           </Marker>
         ))}
       </MapView>
+
+      {selectedPav && (
+        <ReparationModal
+          item={selectedPav}
+          onClose={() => selectPav(null)}
+        />
+      )}
     </MobileLayout>
   )
 }
