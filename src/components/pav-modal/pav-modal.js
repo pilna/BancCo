@@ -6,11 +6,14 @@ import Close from '../../../assets/close.svg'
 import React from 'react'
 import { styles } from './pav-modal.style';
 import { usePavStatus } from '../../hooks/usePavStatus';
+import {useDegradation} from "../../hooks/useDegradation";
+import {DegradationModal} from "../degradation-modal";
 
 const PavModal = ({ item, onClose }) => {
   const buttonFactory = new ButtonFactory();
   const { pavIsOpen } = usePavStatus();
   const itemIsOpen = pavIsOpen(item);
+  const { selectedDegradation, selectDegradation } = useDegradation();
 
   return (
     <View style={styles.modalContainer}>
@@ -57,7 +60,7 @@ const PavModal = ({ item, onClose }) => {
               <View style={{ width: "45%" }}>
                 {buttonFactory.createTextButton(
                   "Dégradation",
-                  () => console.log("Dégradation"),
+                  () => selectDegradation(item),
                   "red"
                 )}
               </View>
@@ -69,13 +72,21 @@ const PavModal = ({ item, onClose }) => {
                   "blue"
                 )}
               </View>
+
             </View>
           </View>
         </View>
 
         <Text style={styles.pavModalStreet}>{ item.streetName }</Text>
       </View>
+      {selectedDegradation && (
+          <DegradationModal
+              item={selectedDegradation}
+              onClose={() => selectDegradation(null)}
+          />
+      )}
     </View>
+
   )
 }
 

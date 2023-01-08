@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 
-import { FilterModal, PavModal } from '../../components';
+import {DegradationModal, FilterModal, PavModal} from '../../components';
 import { Image, View } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import React, {useEffect, useMemo, useState} from 'react'
@@ -22,6 +22,7 @@ const ExplorePage = ({ navigation }) => {
   const { pav } = usePav();
   const { voiries } = useVoiries();
   const { selectedPav, selectPav } = useSelectedPav();
+
   const { getPinIcon } = usePinIcon();
   const { pavIsOpen } = usePavStatus();
   const { filter, filterPav, filterVoiries, setFilter, filterValues } = useFiler();
@@ -167,14 +168,18 @@ const ExplorePage = ({ navigation }) => {
         loadingEnabled
       >
         {voiriesMarkers}
+        {pavMarkers}
       </MapView>
 
+
+
       {selectedPav && (
-        <PavModal 
+        <PavModal
           item={selectedPav} 
           onClose={() => selectPav(null)}
         />
       )}
+
       
       {showFilterModal && (
         <FilterModal
