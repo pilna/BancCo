@@ -124,6 +124,24 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
     </>
   ), [voiries, getPinIcon, filterVoiries]);
 
+  const getDistance = (origin, target) => {
+    return Math.sqrt((origin.latitude - target.lattitude) ** 2 + (origin.longitude - target.longitude) ** 2);
+  }
+
+  const getNearestBanc = () => {
+    if(origin.latitude === null || origin.longitude === null) {
+      return null;
+    }
+
+    const banc = voiries.filter(item => item.description === "Banc public");
+
+    return banc.reduce((prev, curr) => {
+      return getDistance(origin, prev) < getDistance(origin, curr) ? prev : curr;
+    }) 
+  }
+
+  
+
     return (
     <MobileLayout credentials={credentials} navigation={navigation}>
       {!showFilterModal && !selectedPav && !showLegendeModal && (
@@ -150,6 +168,25 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
             )}
           </View>
       )}
+
+      {
+        <View style={{
+            position: 'absolute',
+            bottom: 130,
+            right: 10,
+            zIndex: 2
+          }}>
+          {buttonFactory.createBenchButton(
+            () => {
+              const banc = getNearestBanc();
+              setDestination({
+                latitude: banc.coordinate.lattitude,
+                longitude: banc.coordinate.longitude
+              })
+            }
+          )}
+        </View>
+      }
       
       <MapView 
         initialRegion={{

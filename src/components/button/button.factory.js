@@ -1,3 +1,4 @@
+import BenchIcon from "../../../assets/bench.svg"
 import { ButtonBuilder } from "./button.builder"
 import Compass from "../../../assets/compass.svg"
 import GlobeIcon from "../../../assets/globe.svg"
@@ -11,6 +12,14 @@ export class ButtonFactory {
   createGlobButton(onClick) {
     return new ButtonBuilder()
       .withIcon(<GlobeIcon width={36} height={36} />)
+      .withOnClick(onClick)
+      .setBackgroundColor("#fff")
+      .build()
+  }
+
+  createBenchButton(onClick) {
+    return new ButtonBuilder()
+      .withIcon(<BenchIcon width={36} height={36} />)
       .withOnClick(onClick)
       .setBackgroundColor("#fff")
       .build()
