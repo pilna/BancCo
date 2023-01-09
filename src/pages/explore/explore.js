@@ -179,6 +179,7 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
             mode="WALKING"
             apikey={GOOGLE_MAPS_APIKEY}
           />
+
         )}
       </MapView>
 
@@ -188,6 +189,20 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
           filterValues={filterValues}
         onClose={() => setShowLegendeModal(false)}/>)
       }
+      {destination && (
+            <View style={{
+                position: 'absolute',
+                top: 60,
+                right: 10,
+                zIndex: 2
+            }}>
+                {buttonFactory.createCompassButton(
+                    () => setDestination(false)
+                )}
+            </View>
+        )
+
+        }
 
       {selectedPav && (
         <PavModal
