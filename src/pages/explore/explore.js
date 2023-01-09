@@ -133,7 +133,7 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
       return null;
     }
 
-    const banc = voiries.filter(item => item.description === "Banc public");
+    const banc = voiries.filter(item => item.description === "Banc public" && !item.defective);
 
     return banc.reduce((prev, curr) => {
       return getDistance(origin, prev) < getDistance(origin, curr) ? prev : curr;
@@ -169,7 +169,7 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
           </View>
       )}
 
-      {
+      {!showFilterModal && !selectedPav && !showLegendeModal && (
         <View style={{
             position: 'absolute',
             bottom: 130,
@@ -186,7 +186,7 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
             }
           )}
         </View>
-      }
+      )}
       
       <MapView 
         initialRegion={{
