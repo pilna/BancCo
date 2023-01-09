@@ -1,19 +1,21 @@
 import {Image, Text, TextInput, View} from 'react-native'
 
+import { BanccoService } from '../../services/bancco.service';
 import { ButtonFactory } from '../../components/button/button.factory';
 import React from 'react'
+import logo from '../../../assets/bancco.png'
 import { routes } from '../../router/routes';
 import { styles } from './login.style';
 import { useLogin } from './login.logic';
-import logo from '../../../assets/bancco.png'
 
-const LoginPage = ({ navigation }) => {
+const LoginPage = ({ navigation, setCredentials }) => {
   const { 
     email, 
     password, 
+    error,
+    setError,
     setEmail, 
     setPassword, 
-    onLogin 
   } = useLogin();
   const buttonFactory = new ButtonFactory();
   
@@ -30,6 +32,9 @@ const LoginPage = ({ navigation }) => {
         </Text>
         
         <View style={styles.loginInputContainer}>
+          {error && (
+            <Text style={{ color: "red" }}>Invalid credentials</Text>
+          )}
           <Text style={styles.loginInputLabel}>
             E-mail or username
           </Text>
@@ -57,13 +62,37 @@ const LoginPage = ({ navigation }) => {
         </View>
       </View>
 
-      {buttonFactory.createSubmitButton(
-        "Sign In",
-        () => {
-          onLogin();
-          navigation.navigate(routes.explore);
-        }
-      )}
+      <View style={{ flexDirection: "row" }}>
+        <View style={{ width: "40%", marginRight: 10 }}>
+          {buttonFactory.createSubmitButton(
+            "Anonymous",
+            () => {
+              navigation.navigate(routes.explore);
+            },
+            "#000"
+          )}
+        </View>
+
+        <View style={{ width: "40%", marginLeft: 10 }}>
+          {buttonFactory.createSubmitButton(
+            "Sign In",
+            () => {
+              BanccoService.isValidCredentials(
+                email,
+                password
+              ).then(() => {
+                setCredentials(email, password)
+                navigation.navigate(routes.explore);
+              })
+              .catch(() => {
+                setError(true)
+                setEmail("")
+                setPassword("")
+              })
+            }
+          )}
+        </View>
+      </View>
     </View>
   )
 }

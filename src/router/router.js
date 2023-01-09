@@ -12,7 +12,7 @@ import { routes } from './routes';
 
 const Stack = createNativeStackNavigator();
 
-const Router = () => {  
+const Router = ({ credentials, setCredentials }) => {  
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -23,12 +23,24 @@ const Router = () => {
 
         <Stack.Screen 
           name={routes.explore}
-          component={ExplorePage} 
+          component={(props) => (
+            <ExplorePage 
+              credentials={credentials}
+              setCredentials={setCredentials}
+              {...props}
+            />
+          )} 
         />
 
         <Stack.Screen
           name={routes.login}
-          component={LoginPage}
+          component={(props) => (
+            <LoginPage
+              credentials={credentials}
+              setCredentials={setCredentials}
+              {...props}
+            />
+          )}
         />
         
         <Stack.Screen
@@ -38,17 +50,35 @@ const Router = () => {
         
         <Stack.Screen
           name={routes.profile}
-          component={ProfilePage}
+          component={(props) => (
+            <ProfilePage
+              credentials={credentials}
+              setCredentials={setCredentials}
+              {...props}
+            />
+          )}
         />
 
         <Stack.Screen
           name={routes.promotedTrail}
-          component={PromotedTrailPage}
+          component={(props) => (
+            <PromotedTrailPage
+              credentials={credentials}
+              setCredentials={setCredentials}
+              {...props}
+            />
+          )}
         />
 
         <Stack.Screen
             name={routes.adminMap}
-            component={AdminMapPage}
+            component={(props) => (
+              <AdminMapPage
+                credentials={credentials}
+                setCredentials={setCredentials}
+                {...props}
+              />
+            )}
         />
       </Stack.Navigator>
     </NavigationContainer>

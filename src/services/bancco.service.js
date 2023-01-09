@@ -1,3 +1,4 @@
+import { Buffer } from "buffer";
 import { XMLParser } from "fast-xml-parser";
 import axios from "axios";
 
@@ -229,6 +230,18 @@ const postReperation = async (id) => {
   })
 }
 
+const isValidCredentials = (username, password) => {
+  const b64Credentials = Buffer.from(`${username}:${password}`).toString("base64")
+  return axios.get(
+    "https://www.jean-daniel.eu:8443/geoserver/rest/settings.json",
+    {
+      headers: {
+        Authorization: `Basic ${b64Credentials}`,
+      }
+    }
+  )
+}
+
 export const BanccoService = {
   getSuggestions,
   getVoiries,
@@ -236,4 +249,5 @@ export const BanccoService = {
   postDegradation,
   postSuggestion,
   postReperation,
+  isValidCredentials
 }

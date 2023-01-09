@@ -1,10 +1,9 @@
 import {Image, Text, View} from 'react-native'
 
-import { BanccoService } from '../../services/bancco.service'
 import React from 'react'
+import logo from "../../../assets/bancco.png";
 import { routes } from '../../router/routes'
 import { styles } from './home.style'
-import logo from "../../../assets/bancco.png";
 
 const HomePage = ({ navigation }) => {
   return (

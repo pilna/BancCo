@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 
-import {DegradationModal, FilterModal, PavModal, LegendeModal} from '../../components';
+import {DegradationModal, FilterModal, LegendeModal, PavModal} from '../../components';
 import { Image, View } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import React, {useEffect, useMemo, useState} from 'react'
@@ -18,7 +18,7 @@ import { useSelectedPav } from '../../hooks/useSelectedPav';
 import { useToggle } from '../../hooks/useToggle';
 import { useVoiries } from '../../hooks/useVoiries';
 
-const ExplorePage = ({ navigation }) => {
+const ExplorePage = ({ navigation, setCredentials, credentials }) => {
   const buttonFactory = new ButtonFactory();
   const { pav } = usePav();
   const { voiries } = useVoiries();
@@ -29,7 +29,6 @@ const ExplorePage = ({ navigation }) => {
   const { filter, filterPav, filterVoiries, setFilter, filterValues } = useFiler();
   const [showFilterModal, setShowFilterModal] = useToggle();
   const [showLegendeModal, setShowLegendeModal] = useToggle();
-
 
   const pavMarkers = useMemo(() => (
     <>
