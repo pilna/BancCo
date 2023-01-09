@@ -6,6 +6,7 @@ import MapView, { Marker } from 'react-native-maps'
 import React, {useEffect, useMemo, useState} from 'react'
 
 import { ButtonFactory } from '../../components/button/button.factory';
+import CloseIcon from '../../../assets/close.svg'
 import MapViewDirections from "react-native-maps-directions";
 import { MobileLayout } from '../../layout'
 import defectiveContainerIcon from '../../../assets/defective-container.png'
@@ -190,19 +191,20 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
         onClose={() => setShowLegendeModal(false)}/>)
       }
       {destination && (
-            <View style={{
-                position: 'absolute',
-                top: 60,
-                right: 10,
-                zIndex: 2
-            }}>
-                {buttonFactory.createCompassButton(
-                    () => setDestination(false)
-                )}
-            </View>
-        )
-
-        }
+        <View style={{
+          position: 'absolute',
+          top: 60,
+          right: 10,
+          zIndex: 2,
+          backgroundColor: "#fff"
+        }}
+          onTouchEnd={
+            () => setDestination(null)
+          }
+        >
+          <CloseIcon width={24} height={24} />
+        </View>
+      )}
 
       {selectedPav && (
         <PavModal
