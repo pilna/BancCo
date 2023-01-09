@@ -11,13 +11,13 @@ import { usePav } from '../../hooks/usePav';
 import { useSelectedPav } from '../../hooks/useSelectedPav';
 import { useSuggestions } from '../../hooks/useSuggestions';
 
-const AdminMapPage = ({ navigation }) => {
+const AdminMapPage = ({ navigation, credentials }) => {
   const { suggestions } = useSuggestions();
   const { defectivesItem, updateDefectiveItem } = useDefective();
   const { selectPav, selectedPav } = useSelectedPav();
 
   return (
-    <MobileLayout navigation={navigation}>
+    <MobileLayout credentials={credentials} navigation={navigation}>
       <MapView 
         initialRegion={{
           latitude: 47.9027336,

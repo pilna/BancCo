@@ -8,7 +8,7 @@ import MobileLayout from '../../layout/mobile/mobile.layout';
 import {styles} from "../profile/profile.style";
 import {useSugestion} from "./promoted-trail.logic";
 
-const PromotedTrailPage = ({ navigation }) => {
+const PromotedTrailPage = ({ navigation, credentials }) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
@@ -40,7 +40,7 @@ const PromotedTrailPage = ({ navigation }) => {
   const buttonFactory = new ButtonFactory();
 
   return (
-    <MobileLayout navigation={navigation}>
+    <MobileLayout credentials={credentials} navigation={navigation}>
       <View style={styles.profilePageContainer}>
         <ImageBackground source={require ('../../../assets/background.png')} style={styles.backgroundImage} >
           <View style={styles.topContentContainer}>

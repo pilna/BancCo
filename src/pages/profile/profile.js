@@ -1,12 +1,12 @@
+import {Alert, Button, Image, ImageBackground, Text, View} from 'react-native'
+
 import { MobileLayout } from '../../layout'
 import React from 'react'
-import {Image, ImageBackground, Text, Button, View, Alert} from 'react-native'
 import {styles} from './profile.style'
 
-
-const ProfilePage = ({ navigation }) => {
+const ProfilePage = ({ navigation, credentials }) => {
   return (
-      <MobileLayout navigation={navigation}>
+      <MobileLayout credentials={credentials} navigation={navigation}>
       <View style={styles.profilePageContainer}>
           <ImageBackground source={require ('../../../assets/background.png')} style={styles.backgroundImage} >
 

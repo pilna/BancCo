@@ -137,7 +137,7 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
     */
 
     return (
-    <MobileLayout navigation={navigation}>
+    <MobileLayout credentials={credentials} navigation={navigation}>
       {!showFilterModal && !selectedPav && !showLegendeModal && (
         <View style={{
           position: 'absolute',

@@ -4,11 +4,11 @@ import { View } from 'react-native';
 import { navigationConfig } from './navigation.config';
 import { styles } from './navigation.style';
 
-const Navigation = ({ navigation }) => {
+const Navigation = ({ navigation, credentials }) => {
   return (
     <View style={styles.navigationContainer}>
       {navigationConfig.items.map((item, index) => {
-        return (
+        return item.needAuth && credentials.current.username === undefined ? (<></>) : (
           <NavigationButton 
             key={index} 
             item={item}
