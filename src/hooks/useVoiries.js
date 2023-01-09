@@ -13,7 +13,7 @@ export const useVoiries = () => {
 
     service.getVoiries()
       .then(response => {
-        setVoiries(response.slice(0, 100));
+        setVoiries(response);
       })
       .catch(error => {
         console.log("error", error)
