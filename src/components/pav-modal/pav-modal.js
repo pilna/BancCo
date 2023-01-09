@@ -10,8 +10,7 @@ import {useDegradation} from "../../hooks/useDegradation";
 import { usePavStatus } from '../../hooks/usePavStatus';
 import {usePinIcon} from "../../hooks/usePinIcon";
 
-
-const PavModal = ({ item, onClose }) => {
+const PavModal = ({ item, onClose, onSetDestination }) => {
   const buttonFactory = new ButtonFactory();
   const { pavIsOpen } = usePavStatus();
   const itemIsOpen = pavIsOpen(item);
@@ -84,7 +83,10 @@ const PavModal = ({ item, onClose }) => {
                 {buttonFactory.createTextButton(
                   "Itinéraire",
                   () => {
-                    console.log(item.coordinate),
+                    onSetDestination({
+                      latitude: item.coordinate.lattitude,
+                      longitude: item.coordinate.longitude
+                    })
                     onClose()
                   },
                   "blue"

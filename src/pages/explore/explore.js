@@ -30,6 +30,40 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
   const [showFilterModal, setShowFilterModal] = useToggle();
   const [showLegendeModal, setShowLegendeModal] = useToggle();
 
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+      (async () => {
+
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+              setErrorMsg('Permission to access location was denied');
+              return;
+          }
+
+          let location = await Location.getCurrentPositionAsync({});
+          setLocation(location);
+      })();
+  }, []);
+
+  let text = 'Waiting..';
+  if (errorMsg) {
+      text = errorMsg;
+  } else if (location) {
+      text = JSON.stringify(location);
+  }
+
+  const origin = {
+      latitude: location && location.coords.latitude,
+      longitude: location && location.coords.longitude,
+  };
+
+  console.log(origin)
+  
+  const [destination, setDestination] = useState(null)
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyCjVedUfMGG38F9ToBDlxXa-Ze5ctrwLbA';
+
   const pavMarkers = useMemo(() => (
     <>
       {pav && filterPav(pav).map((item, index) => (
@@ -89,53 +123,6 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
     </>
   ), [voiries, getPinIcon, filterVoiries]);
 
-    /** 
-
-    const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
-
-    useEffect(() => {
-        (async () => {
-
-            let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
-            }
-
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation(location);
-        })();
-    }, []);
-
-    let text = 'Waiting..';
-    if (errorMsg) {
-        text = errorMsg;
-    } else if (location) {
-        text = JSON.stringify(location);
-    }
-
-
-    let moche1;
-    let moche2;
-    if(location == null){
-        moche1 = 45.521563;
-        moche2 = 1.9086066;
-    }else {
-        moche1 = location.coords.latitude;
-        moche2 = location.coords.longitude;
-    }
-
-    const origin = {
-        latitude: moche1,
-        longitude: moche2,
-    };
-    const destination = {
-        latitude: 47.9027336,
-        longitude: 1.9086066,};
-    const GOOGLE_MAPS_APIKEY = 'AIzaSyBlhYWOi17iTeIgISCWBxtCTjdufXscqdM';
-    */
-
     return (
     <MobileLayout credentials={credentials} navigation={navigation}>
       {!showFilterModal && !selectedPav && !showLegendeModal && (
@@ -183,6 +170,16 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
       >
         {voiriesMarkers}
         {pavMarkers}
+        {destination && (
+          <MapViewDirections
+            origin={origin}
+            destination={destination}
+            strokeWidth={3}
+            strokeColor="hotpink"
+            mode="WALKING"
+            apikey={GOOGLE_MAPS_APIKEY}
+          />
+        )}
       </MapView>
 
 
@@ -195,6 +192,7 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
       {selectedPav && (
         <PavModal
           item={selectedPav} 
+          onSetDestination={setDestination}
           onClose={() => selectPav(null)}
         />
       )}
