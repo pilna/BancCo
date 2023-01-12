@@ -125,7 +125,7 @@ const ExplorePage = ({ navigation, setCredentials, credentials }) => {
   ), [voiries, getPinIcon, filterVoiries]);
 
   const getDistance = (origin, target) => {
-    return Math.sqrt((origin.latitude - target.lattitude) ** 2 + (origin.longitude - target.longitude) ** 2);
+    return Math.sqrt((origin.latitude - target.coordinate.lattitude) ** 2 + (origin.longitude - target.coordinate.longitude) ** 2);
   }
 
   const getNearestBanc = () => {
