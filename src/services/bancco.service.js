@@ -14,7 +14,7 @@ const requestType = {
   PAV: "orleans:dechets_pav",
 }
 
-const baseUrl = `https://www.jean-daniel.eu:8443/geoserver/wfs`;
+const baseUrl = `https://pdicost.univ-orleans.fr/geoserver/wfs`;
 
 const _buildUrlWithOptions = (options = {}) => {
   const optionsToUse = {
